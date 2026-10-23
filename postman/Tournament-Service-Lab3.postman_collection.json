@@ -1,0 +1,1744 @@
+{
+  "info": {
+    "_postman_id": "f4c7d94a-8ad0-4e95-9b68-71d8a66adf10",
+    "name": "Tournament Service — Lab 3",
+    "description": "Лабораторная 3: REST API турниров на PostgreSQL. Основной сценарий самостоятельно создаёт пользователей, турнир, команды, заявки и матч, сохраняет созданные ID в переменные коллекции и затем выполняет пять бизнес-операций. CRUD-примеры вынесены отдельно и запускаются выборочно. Отрицательные сценарии выполняются после основного сценария.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "CRUD — отдельные примеры (запускать выборочно)",
+      "description": "Примеры CRUD для каждой сущности. Не запускайте всю папку целиком: некоторые примеры изменяют или удаляют демонстрационные записи, а PUT-примеры могут конфликтовать с уже занятыми уникальными значениями.",
+      "item": [
+        {
+          "name": "Users — список",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/users",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Users — получить по ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/users/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "users",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Users — создать",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/users",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"demo_user\",\n  \"email\": \"demo.user@example.test\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Users — заменить",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/users/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "users",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"demo_user\",\n  \"email\": \"demo.user@example.test\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Users — частично изменить",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/users/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "users",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"demo_user_updated\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Users — удалить",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/users/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "users",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Teams — список",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/teams",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "teams"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Teams — получить по ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/teams/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "teams",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Teams — создать",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/teams",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "teams"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Демо-команда\",\n  \"captainId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Teams — заменить",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/teams/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "teams",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Демо-команда\",\n  \"captainId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Teams — частично изменить",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/teams/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "teams",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Демо-команда 2\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Teams — удалить",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/teams/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "teams",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Tournaments — список",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/tournaments",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "tournaments"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Tournaments — получить по ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/tournaments/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "tournaments",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Tournaments — создать",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/tournaments",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "tournaments"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Новый турнир\",\n  \"teamLimit\": 8\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Tournaments — заменить",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/tournaments/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "tournaments",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Новый турнир\",\n  \"teamLimit\": 8\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Tournaments — частично изменить",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/tournaments/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "tournaments",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"teamLimit\": 6\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Tournaments — удалить",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/tournaments/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "tournaments",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Team applications — список",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/team-applications",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "team-applications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Team applications — получить по ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/team-applications/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "team-applications",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Team applications — создать",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/team-applications",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "team-applications"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"teamId\": 1,\n  \"tournamentId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Team applications — заменить",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/team-applications/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "team-applications",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"teamId\": 1,\n  \"tournamentId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Team applications — частично изменить",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/team-applications/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "team-applications",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"teamId\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Team applications — удалить",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/team-applications/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "team-applications",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Matches — список",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/matches",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "matches"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Matches — получить по ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/matches/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "matches",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Matches — создать",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/matches",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "matches"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tournamentId\": 1,\n  \"team1Id\": 1,\n  \"team2Id\": 2,\n  \"score1\": 0,\n  \"score2\": 0,\n  \"status\": \"SCHEDULED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Matches — заменить",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/matches/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "matches",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tournamentId\": 1,\n  \"team1Id\": 1,\n  \"team2Id\": 2,\n  \"score1\": 0,\n  \"score2\": 0,\n  \"status\": \"SCHEDULED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Matches — частично изменить",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/matches/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "matches",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"score1\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Matches — удалить",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/matches/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "matches",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Основной сценарий — создание данных и 5 бизнес-операций",
+      "description": "Запускайте запросы строго сверху вниз. Создайте исходные данные, одобрите две заявки, отклоните третью, создайте матч только между допущенными командами, затем начните турнир и завершите матч.",
+      "item": [
+        {
+          "name": "1. Создать капитана команды 1",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/users",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "users"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"captain_red_{{runTag}}\",\n  \"email\": \"captain.red.{{runTag}}@example.test\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.collectionVariables.set(\"runTag\", Date.now().toString());",
+                  "for (const key of [\"user1Id\",\"user2Id\",\"user3Id\",\"user4Id\",\"tournamentId\",\"team1Id\",\"team2Id\",\"team3Id\",\"application1Id\",\"application2Id\",\"application3Id\",\"matchId\"]) pm.collectionVariables.unset(key);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Ответ содержит ID созданной записи\", function () { pm.expect(pm.response.json().id).to.be.a(\"number\"); });",
+                  "pm.collectionVariables.set(\"user1Id\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Создать капитана команды 2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/users",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "users"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"captain_blue_{{runTag}}\",\n  \"email\": \"captain.blue.{{runTag}}@example.test\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Ответ содержит ID созданной записи\", function () { pm.expect(pm.response.json().id).to.be.a(\"number\"); });",
+                  "pm.collectionVariables.set(\"user2Id\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Создать капитана команды 3",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/users",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "users"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"captain_green_{{runTag}}\",\n  \"email\": \"captain.green.{{runTag}}@example.test\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Ответ содержит ID созданной записи\", function () { pm.expect(pm.response.json().id).to.be.a(\"number\"); });",
+                  "pm.collectionVariables.set(\"user3Id\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Создать участника команды 1",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/users",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "users"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"player_yellow_{{runTag}}\",\n  \"email\": \"player.yellow.{{runTag}}@example.test\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Ответ содержит ID созданной записи\", function () { pm.expect(pm.response.json().id).to.be.a(\"number\"); });",
+                  "pm.collectionVariables.set(\"user4Id\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Создать турнир",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/tournaments",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "tournaments"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Демо-турнир-{{runTag}}\",\n  \"teamLimit\": 4\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Ответ содержит ID созданной записи\", function () { pm.expect(pm.response.json().id).to.be.a(\"number\"); });",
+                  "pm.collectionVariables.set(\"tournamentId\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Создать команду Красные",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/teams",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "teams"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Красные-{{runTag}}\",\n  \"captainId\": \"{{user1Id}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Ответ содержит ID созданной записи\", function () { pm.expect(pm.response.json().id).to.be.a(\"number\"); });",
+                  "pm.collectionVariables.set(\"team1Id\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "7. Создать команду Синие",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/teams",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "teams"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Синие-{{runTag}}\",\n  \"captainId\": \"{{user2Id}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Ответ содержит ID созданной записи\", function () { pm.expect(pm.response.json().id).to.be.a(\"number\"); });",
+                  "pm.collectionVariables.set(\"team2Id\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "8. Создать команду Зелёные",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/teams",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "teams"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Зелёные-{{runTag}}\",\n  \"captainId\": \"{{user3Id}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Ответ содержит ID созданной записи\", function () { pm.expect(pm.response.json().id).to.be.a(\"number\"); });",
+                  "pm.collectionVariables.set(\"team3Id\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "9. Подать заявку Красных",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/team-applications",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "team-applications"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"teamId\": \"{{team1Id}}\",\n  \"tournamentId\": \"{{tournamentId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Новая заявка ожидает рассмотрения\", function () { pm.expect(pm.response.json().admissionStatus).to.eql(\"PENDING\"); });",
+                  "pm.test(\"Ответ содержит ID созданной записи\", function () { pm.expect(pm.response.json().id).to.be.a(\"number\"); });",
+                  "pm.collectionVariables.set(\"application1Id\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "10. Подать заявку Синих",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/team-applications",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "team-applications"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"teamId\": \"{{team2Id}}\",\n  \"tournamentId\": \"{{tournamentId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Новая заявка ожидает рассмотрения\", function () { pm.expect(pm.response.json().admissionStatus).to.eql(\"PENDING\"); });",
+                  "pm.test(\"Ответ содержит ID созданной записи\", function () { pm.expect(pm.response.json().id).to.be.a(\"number\"); });",
+                  "pm.collectionVariables.set(\"application2Id\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "11. Подать заявку Зелёных",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/team-applications",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "team-applications"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"teamId\": \"{{team3Id}}\",\n  \"tournamentId\": \"{{tournamentId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Новая заявка ожидает рассмотрения\", function () { pm.expect(pm.response.json().admissionStatus).to.eql(\"PENDING\"); });",
+                  "pm.test(\"Ответ содержит ID созданной записи\", function () { pm.expect(pm.response.json().id).to.be.a(\"number\"); });",
+                  "pm.collectionVariables.set(\"application3Id\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Бизнес-операция 1 — одобрить заявку Красных",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/team-applications/{{application1Id}}/approve",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "team-applications",
+                "{{application1Id}}",
+                "approve"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Заявка одобрена\", function () { pm.expect(pm.response.json().admissionStatus).to.eql(\"APPROVED\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Бизнес-операция 1b — одобрить заявку Синих",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/team-applications/{{application2Id}}/approve",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "team-applications",
+                "{{application2Id}}",
+                "approve"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Заявка одобрена\", function () { pm.expect(pm.response.json().admissionStatus).to.eql(\"APPROVED\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Бизнес-операция 2 — отклонить заявку Зелёных",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/team-applications/{{application3Id}}/reject",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "team-applications",
+                "{{application3Id}}",
+                "reject"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Заявка отклонена\", function () { pm.expect(pm.response.json().admissionStatus).to.eql(\"REJECTED\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Проверка: матч с недопущенной командой отклоняется",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tournamentId\": \"{{tournamentId}}\",\n  \"team1Id\": \"{{team1Id}}\",\n  \"team2Id\": \"{{team3Id}}\",\n  \"score1\": 0,\n  \"score2\": 0,\n  \"status\": \"SCHEDULED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/matches",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "matches"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Матч с недопущенной командой отклонён\", function () { pm.response.to.have.status(400); });",
+                  "pm.test(\"Сервер объясняет причину отказа\", function () { pm.expect(pm.response.json().error).to.include(\"допущенными\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "12. Создать матч",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/matches",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "matches"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tournamentId\": \"{{tournamentId}}\",\n  \"team1Id\": \"{{team1Id}}\",\n  \"team2Id\": \"{{team2Id}}\",\n  \"score1\": 0,\n  \"score2\": 0,\n  \"status\": \"SCHEDULED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"Ответ содержит ID созданной записи\", function () { pm.expect(pm.response.json().id).to.be.a(\"number\"); });",
+                  "pm.collectionVariables.set(\"matchId\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Бизнес-операция 3 — начать турнир",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/tournaments/{{tournamentId}}/start",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "tournaments",
+                "{{tournamentId}}",
+                "start"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Турнир перешёл в IN_PROGRESS\", function () { pm.expect(pm.response.json().status).to.eql(\"IN_PROGRESS\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Бизнес-операция 4 — завершить матч",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/matches/{{matchId}}/finish",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "matches",
+                "{{matchId}}",
+                "finish"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Матч завершён\", function () { pm.expect(pm.response.json().status).to.eql(\"FINISHED\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Бизнес-операция 5 — добавить участника в команду Красные",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/teams/{{team1Id}}/members/{{user4Id}}",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "teams",
+                "{{team1Id}}",
+                "members",
+                "{{user4Id}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Ожидаемый HTTP 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Участник добавлен в команду\", function () { const memberIds = pm.response.json().members.map(member => member.id); pm.expect(memberIds).to.include(Number(pm.collectionVariables.get(\"user4Id\"))); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Отрицательные сценарии — после основного сценария",
+      "description": "Запросы должны возвращать 400 Bad Request, так как бизнес-правило запрещает повторное одобрение уже обработанной заявки.",
+      "item": [
+        {
+          "name": "Отрицательный сценарий — повторное одобрение заявки",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/team-applications/{{application1Id}}/approve",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "team-applications",
+                "{{application1Id}}",
+                "approve"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Повторное одобрение отклонено\", function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Отрицательный сценарий — нельзя подать заявку после запуска турнира",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"teamId\": \"{{team3Id}}\",\n  \"tournamentId\": \"{{tournamentId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/team-applications",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "team-applications"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Заявка после запуска турнира отклонена\", function () { pm.response.to.have.status(400); });",
+                  "pm.test(\"Сервер объясняет причину отказа\", function () { pm.expect(pm.response.json().error).to.include(\"после начала турнира\"); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

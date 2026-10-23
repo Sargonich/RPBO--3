@@ -1,0 +1,10 @@
+application:
+  name: tournament-service-test
+  description: Тестовая конфигурация спортивного турнира
+  version: 1.0.0
+  tournament:
+    default-status: PLANNED
+    default-application-status: PENDING
+  validation:
+    allow-empty-team-name: false
+    allow-empty-tournament-name: false
